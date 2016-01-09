@@ -4,36 +4,45 @@
     android:layout_height="match_parent"
     android:background="#3F51B5">
 
-    <LinearLayout
+    <RelativeLayout
         android:id="@+id/layout_damage"
-        android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_above="@+id/layout_murloc"
         android:layout_alignParentTop="true"
-        android:gravity="center"
-        android:layout_above="@+id/layout_murloc">
+        android:orientation="vertical">
 
-        <TextView
+        <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="30"
-            android:id="@+id/textView"
-            android:textColor="#b4ffffff"
-            android:textSize="80sp" />
+            android:orientation="vertical"
+            android:layout_centerInParent="true"
+            android:gravity="center">
+            <TextView
+                android:id="@+id/tv_damage"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="0"
+                android:textColor="#eaffffff"
+                android:textSize="80sp"/>
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="DAMAGE"
-            android:id="@+id/textView2"
-            android:textColor="#b4ffffff" />
-    </LinearLayout>
+            <TextView
+                android:id="@+id/textView2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="DAMAGE"
+                android:textColor="#b4ffffff"
+                android:layout_below="@+id/tv_damage" />
+
+        </LinearLayout>
+    </RelativeLayout>
+
     <LinearLayout
-        android:orientation="vertical"
+        android:id="@+id/layout_murloc"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:id="@+id/layout_murloc">
+        android:orientation="vertical">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -52,11 +61,17 @@
                     android:scaleType="centerCrop"
                     android:src="@drawable/grimscale_oracle" />
 
-                <TextView
+                <View
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
+                    android:background="@color/background_murloc" />
+
+                <TextView
+                    android:id="@+id/tv_grimscale"
                     style="@style/AppTheme.MurlocNumberTextView"
-                    android:text="0"/>
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:text="0" />
 
             </RelativeLayout>
 
@@ -71,11 +86,18 @@
                     android:layout_height="match_parent"
                     android:scaleType="centerCrop"
                     android:src="@drawable/bluegill_warrior" />
-                <TextView
+
+                <View
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
+                    android:background="@color/background_murloc" />
+
+                <TextView
+                    android:id="@+id/tv_bluegill"
                     style="@style/AppTheme.MurlocNumberTextView"
-                    android:text="0"/>
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:text="0" />
             </RelativeLayout>
         </LinearLayout>
 
@@ -95,11 +117,18 @@
                     android:layout_height="match_parent"
                     android:scaleType="centerCrop"
                     android:src="@drawable/baby_murloc" />
-                <TextView
+
+                <View
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
+                    android:background="@color/background_murloc" />
+
+                <TextView
+                    android:id="@+id/tv_baby_murloc"
                     style="@style/AppTheme.MurlocNumberTextView"
-                    android:text="0"/>
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:text="0" />
             </RelativeLayout>
 
             <RelativeLayout
@@ -113,11 +142,18 @@
                     android:layout_height="match_parent"
                     android:scaleType="centerCrop"
                     android:src="@drawable/murloc_warleader" />
-                <TextView
+
+                <View
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
+                    android:background="@color/background_murloc" />
+
+                <TextView
+                    android:id="@+id/tv_warleader"
                     style="@style/AppTheme.MurlocNumberTextView"
-                    android:text="0"/>
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:text="0" />
             </RelativeLayout>
         </LinearLayout>
 
@@ -132,11 +168,18 @@
                 android:layout_height="match_parent"
                 android:scaleType="centerCrop"
                 android:src="@drawable/murkeye_full" />
-            <TextView
+
+            <View
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:background="@color/background_murloc" />
+
+            <TextView
+                android:id="@+id/tv_murkeye"
                 style="@style/AppTheme.MurlocNumberTextView"
-                android:text="0"/>
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="0" />
         </RelativeLayout>
 
     </LinearLayout>

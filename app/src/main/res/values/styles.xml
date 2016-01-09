@@ -22,7 +22,7 @@
     <style name="AppTheme.MurlocNumberTextView" >
         <item name="android:gravity">center</item>
         <item name="android:textColor">#B4FFFFFF</item>
-        <item name="android:background">#72000000</item>
+        <item name="android:background">@drawable/background_murloc</item>
         <item name="android:textSize">50sp</item>
     </style>
 </resources>
