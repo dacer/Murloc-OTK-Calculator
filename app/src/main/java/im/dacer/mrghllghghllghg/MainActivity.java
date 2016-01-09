@@ -11,7 +11,11 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.SeekBar;
 import android.widget.TextView;
+
+import com.h6ah4i.android.widget.verticalseekbar.VerticalSeekBar;
+
 
 import java.util.ArrayList;
 
@@ -23,6 +27,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private TextView tvGrimscale;
     private TextView tvBabyMurloc;
     private TextView tvDamage;
+    private TextView tvMinions;
+    private VerticalSeekBar seekBarMinions;
 
     private int numMurkEye;
     private int numBluegill;
@@ -30,7 +36,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private int numGrimscale;
     private int numBabyMurloc;
     private int numDamage;
-    private int numAvaliableMinions;
+    private int numAvailableMinions;
 
     private ArrayList<Integer> murlocList;
     
@@ -51,8 +57,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         tvWarleader = (TextView) findViewById(R.id.tv_warleader);
         tvGrimscale = (TextView) findViewById(R.id.tv_grimscale);
         tvBabyMurloc = (TextView) findViewById(R.id.tv_baby_murloc);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.my_toolbar);
+        seekBarMinions = (VerticalSeekBar) findViewById(R.id.mySeekBar);
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
+        Toolbar toolbar = (Toolbar) findViewById(R.id.my_toolbar);
+        tvMinions = (TextView) findViewById(R.id.tv_minions);
 
         tvMurkEye.setTag(0);
         tvBluegill.setTag(1);
@@ -74,12 +82,32 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 init();
             }
         });
+        seekBarMinions.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+            @Override
+            public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
+                numAvailableMinions = progress;
+                tvMinions.setText(String.valueOf(progress));
+                calculateDamageAndShowNumbers();
+            }
+
+            @Override
+            public void onStartTrackingTouch(SeekBar seekBar) {
+
+            }
+
+            @Override
+            public void onStopTrackingTouch(SeekBar seekBar) {
+
+            }
+        });
     }
 
     private void init() {
         murlocList = new ArrayList<>();
         numMurkEye = numBluegill = numWarleader = numGrimscale = numBabyMurloc = 0;
-        numAvaliableMinions = 7;
+        numAvailableMinions = 7;
+        seekBarMinions.setProgress(numAvailableMinions);
+        tvMinions.setText(String.valueOf(numAvailableMinions));
         calculateDamageAndShowNumbers();
     }
 
@@ -118,7 +146,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         int mNumWarleader = 0;
         int mNumGrimscale = 0;
         int mNumBabyMurloc = 0;
-        int numMinion = Math.min(murlocList.size(), numAvaliableMinions);
+        int numMinion = Math.min(murlocList.size(), numAvailableMinions);
         for (int i=0; i<numMinion; i++) {
             int murloc = murlocList.get(i);
             switch (murloc){
@@ -140,19 +168,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             }
         }
 
-        Log.e("num: ", String.valueOf(mNumMurkEye) + ", " +
-                String.valueOf(mNumBluegill) + ", " +
-                String.valueOf(mNumWarleader) + ", " +
-                String.valueOf(mNumGrimscale) + ", " +
-                String.valueOf(mNumBabyMurloc) + ", ");
-
         int bluegillAttack = 2 + 2 * mNumWarleader + mNumGrimscale;
         int murkEyeAttack = 2 + 2 * mNumWarleader + mNumGrimscale +
                 (mNumMurkEye + mNumBluegill + mNumWarleader + mNumGrimscale + mNumBabyMurloc - 1);
         numDamage = bluegillAttack * mNumBluegill + murkEyeAttack * mNumMurkEye;
-
-        Log.e("bluegillAttack", String.valueOf(bluegillAttack));
-        Log.e("murkEyeAttack", String.valueOf(murkEyeAttack));
     }
 
     private void showNumbers() {
@@ -162,7 +181,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         tvGrimscale.setText(String.valueOf(numGrimscale));
         tvBabyMurloc.setText(String.valueOf(numBabyMurloc));
         tvDamage.setText(String.valueOf(numDamage));
-
     }
 
     @Override

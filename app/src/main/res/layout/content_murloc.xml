@@ -2,6 +2,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="#3F51B5">
 
     <RelativeLayout
@@ -11,7 +12,44 @@
         android:layout_above="@+id/layout_murloc"
         android:layout_alignParentTop="true"
         android:orientation="vertical">
+        <com.h6ah4i.android.widget.verticalseekbar.VerticalSeekBarWrapper
+            android:id="@+id/seek_bar_wrapper"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_alignParentLeft="false"
+            android:layout_alignParentRight="true">
+            <com.h6ah4i.android.widget.verticalseekbar.VerticalSeekBar
+                android:id="@+id/mySeekBar"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:max="7"
+                android:progress="1"
+                app:seekBarRotation="CW90" /> <!-- Rotation: CW90 or CW270 -->
+        </com.h6ah4i.android.widget.verticalseekbar.VerticalSeekBarWrapper>\
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="false"
+            android:layout_alignParentLeft="true"
+            android:orientation="vertical"
+            android:paddingLeft="10dp"
+            android:layout_alignParentBottom="true"
+            android:paddingBottom="10dp"
+            android:gravity="center">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="8"
+                android:textColor="@color/colorAccent"
+                android:id="@+id/tv_minions"
+                android:textSize="20sp" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="MINIONS"
+                android:textColor="@color/colorAccent"/>
 
+        </LinearLayout>
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
