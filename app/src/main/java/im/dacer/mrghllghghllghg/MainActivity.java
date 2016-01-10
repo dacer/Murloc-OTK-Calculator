@@ -5,7 +5,6 @@ import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -13,6 +12,7 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.widget.SeekBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.h6ah4i.android.widget.verticalseekbar.VerticalSeekBar;
 
@@ -30,16 +30,18 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private TextView tvMinions;
     private VerticalSeekBar seekBarMinions;
 
-    private int numMurkEye;
-    private int numBluegill;
-    private int numWarleader;
-    private int numGrimscale;
-    private int numBabyMurloc;
     private int numDamage;
     private int numAvailableMinions;
 
     private ArrayList<Integer> murlocList;
-    
+    private ArrayList<ArrayList<Integer>> murlocHistoryList; //For undo
+
+    public final static int MURLOC_MURK_EYE = 0;
+    public final static int MURLOC_BLUEGILL = 1;
+    public final static int MURLOC_WARLEADER = 2;
+    public final static int MURLOC_GRIMSCALE = 3;
+    public final static int MURLOC_BABYMURLOC = 4;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
@@ -74,7 +76,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         tvWarleader.setOnClickListener(this);
         tvGrimscale.setOnClickListener(this);
         tvBabyMurloc.setOnClickListener(this);
-
+        murlocList = new ArrayList<>();
+        murlocHistoryList = new ArrayList<>();
         setSupportActionBar(toolbar);
         init();
         fab.setOnClickListener(new View.OnClickListener() {
@@ -104,8 +107,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     private void init() {
-        murlocList = new ArrayList<>();
-        numMurkEye = numBluegill = numWarleader = numGrimscale = numBabyMurloc = 0;
+        if (!murlocList.isEmpty()) {
+            murlocHistoryList.add(new ArrayList<>(murlocList));
+        }
+        murlocList.clear();
         numAvailableMinions = 7;
         seekBarMinions.setProgress(numAvailableMinions);
         tvMinions.setText(String.valueOf(numAvailableMinions));
@@ -115,23 +120,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     @Override
     public void onClick(View v) {
         int tag = (int)v.getTag();
-        switch (tag){
-            case 0:
-                numMurkEye++;
-                break;
-            case 1:
-                numBluegill++;
-                break;
-            case 2:
-                numWarleader++;
-                break;
-            case 3:
-                numGrimscale++;
-                break;
-            case 4:
-                numBabyMurloc++;
-                break;
-        }
         murlocList.add(tag);
         calculateDamageAndShowNumbers();
     }
@@ -142,32 +130,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     private void calculateDamage(){
-        int mNumMurkEye = 0;
-        int mNumBluegill = 0;
-        int mNumWarleader = 0;
-        int mNumGrimscale = 0;
-        int mNumBabyMurloc = 0;
-        int numMinion = Math.min(murlocList.size(), numAvailableMinions);
-        for (int i=0; i<numMinion; i++) {
-            int murloc = murlocList.get(i);
-            switch (murloc){
-                case 0:
-                    mNumMurkEye++;
-                    break;
-                case 1:
-                    mNumBluegill++;
-                    break;
-                case 2:
-                    mNumWarleader++;
-                    break;
-                case 3:
-                    mNumGrimscale++;
-                    break;
-                case 4:
-                    mNumBabyMurloc++;
-                    break;
-            }
-        }
+        int[] murlocNumList = getMurlocNumList(murlocList, numAvailableMinions);
+        int mNumMurkEye = murlocNumList[0];
+        int mNumBluegill = murlocNumList[1];
+        int mNumWarleader = murlocNumList[2];
+        int mNumGrimscale = murlocNumList[3];
+        int mNumBabyMurloc = murlocNumList[4];
 
         int bluegillAttack = 2 + 2 * mNumWarleader + mNumGrimscale;
         int murkEyeAttack = 2 + 2 * mNumWarleader + mNumGrimscale +
@@ -176,12 +144,51 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     private void showNumbers() {
-        tvMurkEye.setText(String.valueOf(numMurkEye));
-        tvBluegill.setText(String.valueOf(numBluegill));
-        tvWarleader.setText(String.valueOf(numWarleader));
-        tvGrimscale.setText(String.valueOf(numGrimscale));
-        tvBabyMurloc.setText(String.valueOf(numBabyMurloc));
+        int[] murlocNumList = getMurlocNumList(murlocList);
+        tvMurkEye.setText(String.valueOf(murlocNumList[0]));
+        tvBluegill.setText(String.valueOf(murlocNumList[1]));
+        tvWarleader.setText(String.valueOf(murlocNumList[2]));
+        tvGrimscale.setText(String.valueOf(murlocNumList[3]));
+        tvBabyMurloc.setText(String.valueOf(murlocNumList[4]));
         tvDamage.setText(String.valueOf(numDamage));
+    }
+
+
+    private int[] getMurlocNumList(ArrayList<Integer> list) {
+        return getMurlocNumList(list, -1);
+    }
+
+    private int[] getMurlocNumList(ArrayList<Integer> list, int limit) {
+        int numMurkEye = 0;
+        int numBluegill = 0;
+        int numWarleader = 0;
+        int numGrimscale = 0;
+        int numBabyMurloc = 0;
+        int numMinion = list.size();
+        if(limit != -1){
+            numMinion = Math.min(list.size(), limit);
+        }
+        for (int i=0; i<numMinion; i++) {
+            int murloc = list.get(i);
+            switch (murloc){
+                case MURLOC_MURK_EYE:
+                    numMurkEye++;
+                    break;
+                case MURLOC_BLUEGILL:
+                    numBluegill++;
+                    break;
+                case MURLOC_WARLEADER:
+                    numWarleader++;
+                    break;
+                case MURLOC_GRIMSCALE:
+                    numGrimscale++;
+                    break;
+                case MURLOC_BABYMURLOC:
+                    numBabyMurloc++;
+                    break;
+            }
+        }
+        return new int[]{numMurkEye, numBluegill, numWarleader, numGrimscale, numBabyMurloc};
     }
 
     @Override
@@ -194,6 +201,19 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
         if (id == R.id.action_settings) {
+            return true;
+        }else if (id == R.id.action_undo) {
+            if (!murlocList.isEmpty()) {
+                murlocList.remove(murlocList.size() - 1);
+            }else if(!murlocHistoryList.isEmpty()) {
+                murlocList = new ArrayList<>(murlocHistoryList.get(murlocHistoryList.size()-1));
+                murlocHistoryList.remove(murlocHistoryList.size() - 1);
+            }else {
+                Toast.makeText(this, R.string.nothing_undo, Toast.LENGTH_SHORT).show();
+            }
+
+
+            calculateDamageAndShowNumbers();
             return true;
         }
 
