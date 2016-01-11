@@ -46,8 +46,9 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="MINIONS"
-                android:textColor="@color/colorAccent"/>
+                android:text="@string/minions"
+                android:textAllCaps="true"
+                android:textColor="@color/colorAccent" />
 
         </LinearLayout>
         <LinearLayout
@@ -68,7 +69,8 @@
                 android:id="@+id/textView2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="DAMAGE"
+                android:text="@string/damage"
+                android:textAllCaps="true"
                 android:textColor="#b4ffffff"
                 android:layout_below="@+id/tv_damage" />
 

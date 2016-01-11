@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">鱼人骑斩杀计算器</string>
+    <string name="action_settings">设置</string>
+    <string name="action_undo">撤销</string>
+    <string name="nothing_undo">没有可以撤销的</string>
+    <string name="damage">伤害</string>
+    <string name="minions">随从</string>
+</resources>
