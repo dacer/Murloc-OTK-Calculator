@@ -1,11 +1,9 @@
-# Simple Pomodoro [![Google Play](http://developer.android.com/images/brand/en_generic_rgb_wo_45.png)](https://play.google.com/store/apps/details?id=im.dacer.mrghllghghllghg)
+# Murloc OTK Calculator [![Google Play](http://developer.android.com/images/brand/en_generic_rgb_wo_45.png)](https://play.google.com/store/apps/details?id=im.dacer.mrghllghghllghg)
 
-## Murloc OTK Calculator
+* Features:
 
-Features:
-
-• Simple & Easy
-• No Ads
+* Simple & Easy
+* No Ads
 
 It based on [this deck](http://www.hearthpwn.com/decks/396767-top3-otk-murloc-by-neviilz)
 
