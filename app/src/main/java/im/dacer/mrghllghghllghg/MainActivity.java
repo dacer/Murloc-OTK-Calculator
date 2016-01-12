@@ -1,5 +1,6 @@
 package im.dacer.mrghllghghllghg;
 
+import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
@@ -200,7 +201,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
-        if (id == R.id.action_settings) {
+        if (id == R.id.action_about) {
+            startActivity(new Intent(this, AboutActivity.class));
             return true;
         }else if (id == R.id.action_undo) {
             if (!murlocList.isEmpty()) {

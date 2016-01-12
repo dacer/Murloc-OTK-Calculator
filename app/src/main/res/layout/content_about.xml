@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    tools:context="im.dacer.mrghllghghllghg.AboutActivity"
+    tools:showIn="@layout/activity_about">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Made with love by Dacer"
+        android:id="@+id/textView"
+        android:layout_marginBottom="@dimen/activity_vertical_margin"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:textColor="#BDBDBD" />
+    <it.sephiroth.android.library.viewrevealanimator.ViewRevealAnimator
+        android:layout_centerHorizontal="true"
+        android:id="@+id/animator"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:animationDuration="@android:integer/config_longAnimTime"
+        app:vra_hideBeforeReveal="false"
+        android:measureAllChildren="true"
+        android:animateFirstView="true"
+        android:outAnimation="@anim/out_animation"
+        android:inAnimation="@anim/in_animation"
+        android:interpolator="@android:interpolator/accelerate_decelerate">
+
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/iv_top"
+            android:layout_gravity="top"
+            android:src="@drawable/murkeye_full"
+            android:scaleType="fitStart" />
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/iv_top2"
+            android:layout_gravity="top"
+            android:src="@drawable/s_2015_10_31_22_38_45"
+            android:scaleType="fitStart" />
+
+
+
+    </it.sephiroth.android.library.viewrevealanimator.ViewRevealAnimator>
+</RelativeLayout>

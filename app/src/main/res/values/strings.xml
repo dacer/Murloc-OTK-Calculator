@@ -5,4 +5,5 @@
     <string name="nothing_undo">Nothing to undo</string>
     <string name="damage">damage</string>
     <string name="minions">minions</string>
+    <string name="title_activity_about">About</string>
 </resources>

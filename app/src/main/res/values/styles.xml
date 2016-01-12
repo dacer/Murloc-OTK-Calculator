@@ -12,14 +12,14 @@
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
     </style>
-    <style name="AppTheme.FullScreen" parent="AppTheme.FullScreen">
-    </style>
+
+    <style name="AppTheme.FullScreen" parent="AppTheme.FullScreen"></style>
 
     <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
 
     <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
 
-    <style name="AppTheme.MurlocNumberTextView" >
+    <style name="AppTheme.MurlocNumberTextView">
         <item name="android:gravity">center</item>
         <item name="android:textColor">#B4FFFFFF</item>
         <item name="android:background">@drawable/background_murloc</item>

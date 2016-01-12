@@ -5,4 +5,5 @@
     <string name="nothing_undo">没有可以撤销的</string>
     <string name="damage">伤害</string>
     <string name="minions">随从</string>
+    <string name="title_activity_about">关于</string>
 </resources>
