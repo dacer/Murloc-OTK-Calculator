@@ -1,18 +1,21 @@
 # Simple Pomodoro [![Google Play](http://developer.android.com/images/brand/en_generic_rgb_wo_45.png)](https://play.google.com/store/apps/details?id=im.dacer.mrghllghghllghg)
 
-<h3>Murloc OTK Calculator</h3>
-<p>
-Features:<br>
+## Murloc OTK Calculator
+
+Features:
+
 • Simple & Easy
 • No Ads
 
 It based on [this deck](http://www.hearthpwn.com/decks/396767-top3-otk-murloc-by-neviilz)
-</p>
+
+## Screenshot
+
+![Screenshot](https://github.com/dacer/Murloc-OTK-Calculator/blob/master/pics/Screenshot_2016-01-12-22-54-03.png)
 
 ## Direct Download
-[CLICK ME](https://github.com/dacer/Murloc-OTK-Calculator/blob/master/app/app-release.apk)
 
-* MIT License
+[CLICK ME](https://github.com/dacer/Murloc-OTK-Calculator/blob/master/app/app-release.apk)
 
 ## License
 
